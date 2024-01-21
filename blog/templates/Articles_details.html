@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}
+{{post.title_tag}}
+{% endblock %}
+{% block content %}
+  
+   <style>
+h1 {
+  text-align: center;
+
+}
+
+body {
+  margin: 0;
+  font-size: 20px;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+
+                         
+ <h1><b> {{post.title}}!! </b></h1>
+    <small>By: {{ post.author.first_name }}
+        {{ post.author.last_name }}
+        {{ post.post_date }}
+        </small>
+{% if user.is_authenticated %}
+{% if user.id == post.author.id %}
+<a href="{% url 'update_post' post.pk %}">(Edit)</a>
+    <a href="{% url 'delete_post' post.pk %}">(Delete)</a><br/>
+
+{% endif %}
+{% endif %}
+<hr>
+</br>
+{% if post.header_image %}
+<img src="{{ post.header_image.url }}">
+{% endif %}
+<br/><br/>
+<body>
+{{post.body|safe}}
+   </body>
+<br/>
+  <button class="btn btn-block btn-primary" style="font-size: 30px"><i class="fa fa-thumbs-up"></i> Like</button>
+<a href="{%url 'home' %}" class="btn btn-secondary" style="font-size: 30px">Back</a>
+<hr> <br/> <br/> <br/>
+
+
+
+	                                  
+                                   
+   
+</form>
+{% endblock %}
